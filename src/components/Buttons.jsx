@@ -1,8 +1,5 @@
 
-const Buttons = () => {
-
-  const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const stringNumbers = ['zero', 'one', 'two', 'three', 'four', 'five','six', 'seven', 'eight', 'nine']
+const Buttons = ({handleNumber, handleAddition, handleEvalulation}) => {
 
   const buttonProps = [
     {
@@ -75,20 +72,104 @@ const Buttons = () => {
     },
   ]
 
-  const elements = buttonProps.map((propObj) => {
-    return (
-      <button
-      key={propObj.id}
-      id={propObj.id}
-      >
-        {propObj.content}
-      </button>
-    )
-  })
+  // const elements = buttonProps.map((propObj) => {
+  //   return (
+  //     <button
+  //     key={propObj.id}
+  //     id={propObj.id}
+  //     value={propObj.content}
+  //     onClick={onClick}
+  //     >
+  //       {propObj.content}
+  //     </button>
+  //   )
+  // })
 
   return (
     <div>
-      {elements}
+      <button
+        id='one'
+        value={1}
+        onClick={handleNumber}
+      >
+        1
+      </button>
+      <button
+        id='two'
+        value={2}
+        onClick={handleNumber}
+      >
+        2
+      </button>
+      <button
+        id='three'
+        value={3}
+        onClick={handleNumber}
+      >
+        3
+      </button>
+      <button
+        id='four'
+        value={4}
+        onClick={handleNumber}
+      >
+        4
+      </button>
+      <button
+        id='five'
+        value={5}
+        onClick={handleNumber}
+      >
+        5
+      </button>
+      <button
+        id='six'
+        value={6}
+        onClick={handleNumber}
+      >
+        6
+      </button>
+      <button
+        id='seven'
+        value={7}
+        onClick={handleNumber}
+      >
+        7
+      </button>
+      <button
+        id='eight'
+        value={8}
+        onClick={handleNumber}
+      >
+        8
+      </button>
+      <button
+        id='nine'
+        value={9}
+        onClick={handleNumber}
+      >
+        9
+      </button>
+      <button
+        id='add'
+        value='+'
+        onClick={handleAddition}
+      >
+        +
+      </button>
+      <button
+        id='equals'
+        value='='
+        onClick={handleEvalulation}
+      >
+        =
+      </button>
+      <button
+        id='clear'
+        
+      >
+        AC
+      </button>
     </div>
   )
 }

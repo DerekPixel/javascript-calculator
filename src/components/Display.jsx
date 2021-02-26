@@ -1,14 +1,11 @@
 
-const Display = () => {
+const Display = ({input}) => {
   return (
     <div
       id='display'
     >
       <div className="input">
-        0
-      </div>
-      <div className="output">
-        0
+        {input}
       </div>
     </div>
   )

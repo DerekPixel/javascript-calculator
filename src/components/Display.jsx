@@ -5,7 +5,7 @@ const Display = ({input}) => {
       id='display'
     >
       <div className="input">
-        {input}
+        Input:{input}
       </div>
     </div>
   )

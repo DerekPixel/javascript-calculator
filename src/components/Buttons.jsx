@@ -1,5 +1,5 @@
 
-const Buttons = ({handleNumber, handleAddition, handleEvalulation}) => {
+const Buttons = ({handleNumber, handleAddition, handleEvalulation, handleClear}) => {
 
   const buttonProps = [
     {
@@ -151,6 +151,13 @@ const Buttons = ({handleNumber, handleAddition, handleEvalulation}) => {
         9
       </button>
       <button
+        id='zero'
+        value={0}
+        onClick={handleNumber}
+      >
+        0
+      </button>
+      <button
         id='add'
         value='+'
         onClick={handleAddition}
@@ -166,7 +173,7 @@ const Buttons = ({handleNumber, handleAddition, handleEvalulation}) => {
       </button>
       <button
         id='clear'
-        
+        onClick={handleClear}
       >
         AC
       </button>

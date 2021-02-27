@@ -1,5 +1,5 @@
 
-const Buttons = ({handleNumber, handleAddition, handleEvalulation, handleClear}) => {
+const Buttons = ({handleNumber, handleOperations, handleEvalulation, handleClear}) => {
 
   const buttonProps = [
     {
@@ -167,9 +167,16 @@ const Buttons = ({handleNumber, handleAddition, handleEvalulation, handleClear})
       <button
         id='add'
         value='+'
-        onClick={handleAddition}
+        onClick={handleOperations}
       >
         +
+      </button>
+      <button
+        id='subtract'
+        value='-'
+        onClick={handleOperations}
+      >
+        -
       </button>
       <button
         id='equals'

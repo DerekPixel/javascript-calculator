@@ -8,11 +8,10 @@ import Results from './components/Results';
 
 function App() {
 
-  const [previousStoredValue, setPreviousStoredValue] = useState('');
-  const [storedValue, setStoredValue] = useState('');
   const [operation, setOperation] = useState('');
   const [input, setInput] = useState('');
   const [results, setResults] = useState('0');
+  const [evaluated, setEvaluated] = useState(false);
 
   const handleAddition = (event) => {
 
@@ -22,8 +21,8 @@ function App() {
 
         var nums = input.match(/(\d+)\.?(\d+)?/g)
 
-        var firstNum = parseInt(nums[0], 10);
-        var secondNum = parseInt(nums[1], 10);
+        var firstNum = parseFloat(nums[0]);
+        var secondNum = parseFloat(nums[1]);
 
         switch(operation) {
           case '+':
@@ -31,7 +30,7 @@ function App() {
             setResults(sum);
             setInput(`${sum}+`);
             setOperation('+');
-            break;
+          break;
         }
       }else {
         setInput(input + event.target.value);
@@ -46,8 +45,8 @@ function App() {
 
     var nums = input.match(/(\d+)\.?(\d+)?/g)
 
-    var firstNum = parseInt(nums[0], 10);
-    var secondNum = parseInt(nums[1], 10);
+    var firstNum = parseFloat(nums[0]);
+    var secondNum = parseFloat(nums[1]);
     
     if(!isNaN(secondNum) && !isNaN(firstNum)) {
       switch(operation) {
@@ -56,7 +55,19 @@ function App() {
           setResults(sum);
           setInput(`${sum}`);
           setOperation('');
+          setEvaluated(true);
       }
+    }
+  }
+
+  const handleNumber = (event) => {
+    if(evaluated) {
+      setEvaluated(false);
+
+      setInput(event.target.value);
+
+    } else {
+      setInput(input + event.target.value);
     }
   }
 
@@ -71,7 +82,7 @@ function App() {
       <Results results={results} />
       <Display input={input} />
       <Buttons 
-        handleNumber={event => setInput(input + event.target.value)} 
+        handleNumber={event => handleNumber(event)} 
         handleAddition={event => handleAddition(event)}
         handleEvalulation={() => handleEvalulation()}
         handleClear={() => handleClear()}

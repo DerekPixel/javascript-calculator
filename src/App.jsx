@@ -13,35 +13,25 @@ function App() {
   const [results, setResults] = useState('0');
   const [evaluated, setEvaluated] = useState(false);
 
-  const handleAddition = (event) => {
+  const handleOperations = (event) => {
 
     if(event !== undefined) {
 
       if(/(\d+)\.?(\d+)?[+\*/-]+(\d+)\.?(\d+)?/g.test(input)) {
 
-        var nums = input.match(/(\d+)\.?(\d+)?/g)
+        handleEvalulation(false, event.target.value);
 
-        var firstNum = parseFloat(nums[0]);
-        var secondNum = parseFloat(nums[1]);
-
-        switch(operation) {
-          case '+':
-            var sum = firstNum + secondNum;
-            setResults(sum);
-            setInput(`${sum}+`);
-            setOperation('+');
-          break;
-        }
       }else {
+        setEvaluated(false);
         setInput(input + event.target.value);
-        setOperation('+');
+        setOperation(event.target.value);
       }
 
     }
 
   }
 
-  const handleEvalulation = () => {
+  const handleEvalulation = (pressedEqualsButton, operationToSet = '') => {
 
     var nums = input.match(/(\d+)\.?(\d+)?/g)
 
@@ -53,11 +43,22 @@ function App() {
         case '+':
           var sum = firstNum + secondNum;
           setResults(sum);
-          setInput(`${sum}`);
-          setOperation('');
-          setEvaluated(true);
+          setInput(`${sum}${operationToSet}`);
+          setOperation(operationToSet);
+          break;
+        case '-':
+          var diff = firstNum - secondNum;
+          setResults(diff);
+          setInput(`${diff}${operationToSet}`);
+          setOperation(operationToSet);
+          break;
       }
     }
+
+    if(pressedEqualsButton) {
+      setEvaluated(true);
+    }
+
   }
 
   const handleNumber = (event) => {
@@ -83,8 +84,8 @@ function App() {
       <Display input={input} />
       <Buttons 
         handleNumber={event => handleNumber(event)} 
-        handleAddition={event => handleAddition(event)}
-        handleEvalulation={() => handleEvalulation()}
+        handleOperations={event => handleOperations(event)}
+        handleEvalulation={() => handleEvalulation(true)}
         handleClear={() => handleClear()}
       />
     </div>

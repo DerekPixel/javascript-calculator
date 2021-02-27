@@ -158,6 +158,13 @@ const Buttons = ({handleNumber, handleAddition, handleEvalulation, handleClear})
         0
       </button>
       <button
+        id='decimal'
+        value='.'
+        onClick={handleNumber}
+      >
+        .
+      </button>
+      <button
         id='add'
         value='+'
         onClick={handleAddition}

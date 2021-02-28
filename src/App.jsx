@@ -33,10 +33,10 @@ function App() {
 
   const handleEvalulation = (pressedEqualsButton, operationToSet = '') => {
 
-    var nums = input.match(/(\d+)\.?(\d+)?/g)
+    var nums = input.match(/-?(\d+)\.?(\d+)?/g)
 
     var firstNum = parseFloat(nums[0]);
-    var secondNum = parseFloat(nums[1]);
+    var secondNum = Math.abs(parseFloat(nums[1]));
     
     if(!isNaN(secondNum) && !isNaN(firstNum)) {
       switch(operation) {
@@ -52,6 +52,18 @@ function App() {
           setInput(`${diff}${operationToSet}`);
           setOperation(operationToSet);
           break;
+        case '/':
+          var quotient = firstNum / secondNum;
+          setResults(quotient);
+          setInput(`${quotient}${operationToSet}`);
+          setOperation(operationToSet);
+          break;
+        case '*':
+          var product = firstNum * secondNum;
+          setResults(product);
+          setInput(`${product}${operationToSet}`);
+          setOperation(operationToSet);
+          break;
       }
     }
 
@@ -62,6 +74,9 @@ function App() {
   }
 
   const handleNumber = (event) => {
+
+    // if(/^0{2,}/g.test())
+
     if(evaluated) {
       setEvaluated(false);
 
@@ -74,7 +89,7 @@ function App() {
 
   const handleClear = () => {
     setOperation('');
-    setInput('');
+    setInput('0');
     setResults('0');
   }
 

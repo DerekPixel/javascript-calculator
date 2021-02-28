@@ -4,9 +4,9 @@ const Display = ({input}) => {
     <div
       id='display'
     >
-      <div className="input">
-        Input:{input}
-      </div>
+      {/* <div className="input"> */}
+        {input}
+      {/* </div> */}
     </div>
   )
 }

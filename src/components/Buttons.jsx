@@ -179,6 +179,20 @@ const Buttons = ({handleNumber, handleOperations, handleEvalulation, handleClear
         -
       </button>
       <button
+        id='multiply'
+        value='*'
+        onClick={handleOperations}
+      >
+        *
+      </button>
+      <button
+        id='divide'
+        value='/'
+        onClick={handleOperations}
+      >
+        /
+      </button>
+      <button
         id='equals'
         value='='
         onClick={handleEvalulation}

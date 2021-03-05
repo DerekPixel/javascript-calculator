@@ -55,28 +55,32 @@ function App() {
           var sum = firstNum + secondNum;
           setResults(sum);
           setInput(`${sum}${operationToSet}`);
-          setPrevValue(`${sum}${operationToSet}`);
+          setPrevValue(`${sum}`);
+          setCurrentValue('');
           setOperation(operationToSet);
           break;
         case '-':
           var diff = firstNum - secondNum;
           setResults(diff);
           setInput(`${diff}${operationToSet}`);
-          setPrevValue(`${diff}${operationToSet}`);
+          setPrevValue(`${diff}`);
+          setCurrentValue('');
           setOperation(operationToSet);
           break;
         case '/':
           var quotient = firstNum / secondNum;
           setResults(quotient);
           setInput(`${quotient}${operationToSet}`);
-          setPrevValue(`${quotient}${operationToSet}`);
+          setPrevValue(`${quotient}`);
+          setCurrentValue('');
           setOperation(operationToSet);
           break;
         case '*':
           var product = firstNum * secondNum;
           setResults(product);
           setInput(`${product}${operationToSet}`);
-          setPrevValue(`${product}${operationToSet}`);
+          setPrevValue(`${product}`);
+          setCurrentValue('');
           setOperation(operationToSet);
           break;
       }

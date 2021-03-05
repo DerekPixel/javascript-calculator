@@ -5,8 +5,12 @@ import Buttons from './components/Buttons';
 import Display from './components/Display';
 import Results from './components/Results';
 
+//3 + 5 * 6 - 2 / 4 = 32.5 or 11.5
 
 function App() {
+
+  const [currentValue, setCurrentValue] = useState('')
+  const [prevValue, setPrevValue] = useState('')
 
   const [operation, setOperation] = useState('');
   const [input, setInput] = useState('');
@@ -24,6 +28,8 @@ function App() {
       }else {
         setEvaluated(false);
         setInput(input + event.target.value);
+        setPrevValue(currentValue);
+        setCurrentValue('');
         setOperation(event.target.value);
       }
 
@@ -33,10 +39,15 @@ function App() {
 
   const handleEvalulation = (pressedEqualsButton, operationToSet = '') => {
 
-    var nums = input.match(/-?(\d+)\.?(\d+)?/g)
+    // var nums = input.match(/-?(\d+)\.?(\d+)?/g)
 
-    var firstNum = parseFloat(nums[0]);
-    var secondNum = Math.abs(parseFloat(nums[1]));
+    // var firstNum = parseFloat(nums[0]);
+    // var secondNum = Math.abs(parseFloat(nums[1]));
+
+    var firstNum = parseFloat(prevValue);
+    var secondNum = Math.abs(parseFloat(currentValue));
+
+    console.log(firstNum, secondNum);
     
     if(!isNaN(secondNum) && !isNaN(firstNum)) {
       switch(operation) {
@@ -44,24 +55,28 @@ function App() {
           var sum = firstNum + secondNum;
           setResults(sum);
           setInput(`${sum}${operationToSet}`);
+          setPrevValue(`${sum}${operationToSet}`);
           setOperation(operationToSet);
           break;
         case '-':
           var diff = firstNum - secondNum;
           setResults(diff);
           setInput(`${diff}${operationToSet}`);
+          setPrevValue(`${diff}${operationToSet}`);
           setOperation(operationToSet);
           break;
         case '/':
           var quotient = firstNum / secondNum;
           setResults(quotient);
           setInput(`${quotient}${operationToSet}`);
+          setPrevValue(`${quotient}${operationToSet}`);
           setOperation(operationToSet);
           break;
         case '*':
           var product = firstNum * secondNum;
           setResults(product);
           setInput(`${product}${operationToSet}`);
+          setPrevValue(`${product}${operationToSet}`);
           setOperation(operationToSet);
           break;
       }
@@ -74,20 +89,21 @@ function App() {
   }
 
   const handleNumber = (event) => {
-
-    // if(/^0{2,}/g.test())
-
     if(evaluated) {
       setEvaluated(false);
 
-      setInput(event.target.value);
+      setInput(event.target.value)
+      setCurrentValue(event.target.value);
 
     } else {
       setInput(input + event.target.value);
+      setCurrentValue(currentValue + event.target.value);
     }
   }
 
   const handleClear = () => {
+    setPrevValue('');
+    setCurrentValue('');
     setOperation('');
     setInput('0');
     setResults('0');

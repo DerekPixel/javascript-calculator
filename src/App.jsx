@@ -26,33 +26,47 @@ function App() {
         handleEvalulation(false, event.target.value);
 
       }else {
-        setEvaluated(false);
-        setInput(input + event.target.value);
-        setPrevValue(currentValue);
-        setCurrentValue('');
-        setOperation(event.target.value);
+        if(/[-]/g.test(event.target.value)) {
+          if(/[+\*/]/g.test(operation)) {
+            setEvaluated(false);
+            setInput(input + event.target.value);
+            setPrevValue(input + event.target.value);
+            setCurrentValue('-');
+            // setOperation(event.target.value);
+          } else {
+            setEvaluated(false);
+            setInput(input + event.target.value);
+            setPrevValue(input + event.target.value);
+            setCurrentValue('');
+            setOperation(event.target.value);
+          }
+        } else{
+          setEvaluated(false);
+          setInput(input + event.target.value);
+          setPrevValue(input + event.target.value);
+          setCurrentValue('');
+          setOperation(event.target.value);
+        }
       }
-
     }
-
   }
 
   const handleEvalulation = (pressedEqualsButton, operationToSet = '') => {
 
-    // var nums = input.match(/-?(\d+)\.?(\d+)?/g)
-
-    // var firstNum = parseFloat(nums[0]);
-    // var secondNum = Math.abs(parseFloat(nums[1]));
-
     var firstNum = parseFloat(prevValue);
-    var secondNum = Math.abs(parseFloat(currentValue));
+    var secondNum;
 
-    console.log(firstNum, secondNum);
+    if(operation === '-') {
+      secondNum = Math.abs(parseFloat(currentValue));
+    } else {
+      secondNum = parseFloat(currentValue);
+    }
     
     if(!isNaN(secondNum) && !isNaN(firstNum)) {
       switch(operation) {
         case '+':
           var sum = firstNum + secondNum;
+          console.log(sum);
           setResults(sum);
           setInput(`${sum}${operationToSet}`);
           setPrevValue(`${sum}`);
@@ -89,10 +103,51 @@ function App() {
     if(pressedEqualsButton) {
       setEvaluated(true);
     }
-
   }
 
   const handleNumber = (event) => {
+
+    if(/^(0)+/g.test(event.target.value)) {
+      if(/^(0)+/g.test(currentValue)) {
+        return
+      } else {
+        if(evaluated) {
+          setEvaluated(false);
+    
+          setInput(event.target.value)
+          setCurrentValue(event.target.value);
+    
+        } else {
+          if(input === '0') {
+            setInput(currentValue + event.target.value);
+          } else {
+            setInput(input + event.target.value);
+          }
+          setCurrentValue(currentValue + event.target.value);
+        }
+      }
+    }
+
+    if(/(\.)/g.test(event.target.value)) {
+      if(/(\.)/g.test(currentValue)) {
+        return
+      } else {
+        if(evaluated) {
+          setEvaluated(false);
+    
+          setInput(event.target.value)
+          setCurrentValue(event.target.value);
+    
+        } else {
+          if(input === '0') {
+            setInput(currentValue + event.target.value);
+          } else {
+            setInput(input + event.target.value);
+          }
+          setCurrentValue(currentValue + event.target.value);
+        }
+      }
+    }
     if(evaluated) {
       setEvaluated(false);
 
@@ -100,7 +155,11 @@ function App() {
       setCurrentValue(event.target.value);
 
     } else {
-      setInput(input + event.target.value);
+      if(input === '0') {
+        setInput(currentValue + event.target.value);
+      } else {
+        setInput(input + event.target.value);
+      }
       setCurrentValue(currentValue + event.target.value);
     }
   }

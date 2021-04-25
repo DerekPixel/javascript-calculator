@@ -4,9 +4,7 @@ const Display = ({input}) => {
     <div
       id='display'
     >
-      {/* <div className="input"> */}
-        {input}
-      {/* </div> */}
+      {input ? input : '0'}
     </div>
   )
 }

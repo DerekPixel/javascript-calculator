@@ -1,7 +1,9 @@
 
 const Results = ({results}) => {
   return (
-    <div>
+    <div
+      id='results'
+    >
       Results:{results}
     </div>
   )

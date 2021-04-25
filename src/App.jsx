@@ -66,7 +66,6 @@ function App() {
       switch(operation) {
         case '+':
           var sum = firstNum + secondNum;
-          console.log(sum);
           setResults(sum);
           setInput(`${sum}${operationToSet}`);
           setPrevValue(`${sum}`);
@@ -174,14 +173,25 @@ function App() {
 
   return (
     <div className="App">
-      <Results results={results} />
-      <Display input={input} />
-      <Buttons 
-        handleNumber={event => handleNumber(event)} 
-        handleOperations={event => handleOperations(event)}
-        handleEvalulation={() => handleEvalulation(true)}
-        handleClear={() => handleClear()}
-      />
+      <header>
+        <h1 className="title">Javascript Calculator</h1>
+        <div className="creds-div">
+          <p className="cred">Made by Derek Price</p>
+          <a className="cred" href="https://github.com/DerekPixel/javascript-calculator">GitHub</a>
+        </div>
+      </header>
+      <div className="calculator-container">
+        <div className='calculator'>
+          {/* <Results results={results} /> */}
+          <Display input={input} />
+          <Buttons
+            handleNumber={event => handleNumber(event)}
+            handleOperations={event => handleOperations(event)}
+            handleEvalulation={() => handleEvalulation(true)}
+            handleClear={() => handleClear()}
+          />
+        </div>
+      </div>
     </div>
   );
 }
